@@ -1,2 +1,2 @@
-# Angular.NET
+# Angular-NET
 Projet Udemy cours Angular et .NET
