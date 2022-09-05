@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.0",
+    "@angular/cdk": "^14.2.0",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
@@ -23,13 +24,14 @@
     "bootswatch": "^5.2.0",
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^7.1.2",
+    "ngx-spinner": "^10.0.1",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.18",
+    "@angular-devkit/build-angular": "^14.2.1",
     "@angular/cli": "~12.2.18",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
