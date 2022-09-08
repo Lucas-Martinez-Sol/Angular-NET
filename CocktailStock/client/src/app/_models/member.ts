@@ -8,7 +8,7 @@ export interface Member {
     knownAs: string
     created: Date
     lastActive: Date
-    genre: string
+    gender: string
     introduction: string
     lookingFor: string
     interests: string

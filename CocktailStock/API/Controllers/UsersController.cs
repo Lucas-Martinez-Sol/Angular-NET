@@ -36,9 +36,9 @@ namespace API.Controllers
             AppUser user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
             userParams.CurrentUsername = user.UserName;
 
-            if (string.IsNullOrEmpty(userParams.Genre))
+            if (string.IsNullOrEmpty(userParams.Gender))
             {
-                userParams.Genre = user.Genre == "male" ? "female" : "male";
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
             }
 
             PagedList<MemberDTO> users = await _userRepository.GetMembersAsync(userParams);
