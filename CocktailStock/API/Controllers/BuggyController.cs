@@ -28,14 +28,14 @@ namespace API.Controllers
         [HttpGet("not-found")]
         public ActionResult<AppUser> GetNotFound()
         {
-            var thing = _context.Users.Find(-1);
+            AppUser user = _context.Users.Find(-1);
 
-            if (thing == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(thing);
+            return Ok(user);
         }
 
         [HttpGet("server-error")]
