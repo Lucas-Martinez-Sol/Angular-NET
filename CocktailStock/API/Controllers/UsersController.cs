@@ -31,7 +31,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery] UserParams userParams)
         {
             AppUser user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
             userParams.CurrentUsername = user.UserName;
@@ -55,7 +55,8 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto){
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
 
             AppUser user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
 
@@ -72,7 +73,8 @@ namespace API.Controllers
         }
 
         [HttpPost("add-photo")]
-        public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file){
+        public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
+        {
 
             AppUser user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
 
@@ -83,9 +85,10 @@ namespace API.Controllers
                 return BadRequest(result.Error.Message);
             }
 
-            var photo = new Photo{
+            var photo = new Photo
+            {
                 Url = result.SecureUrl.AbsoluteUri,
-                PublicId = result.PublicId 
+                PublicId = result.PublicId
             };
 
             if (user.Photos.Count == 0)
@@ -98,14 +101,15 @@ namespace API.Controllers
             if (await _userRepository.SaveAllAsync())
             {
                 // return _mapper.Map<PhotoDTO>(photo);
-                return CreatedAtRoute("GetUser", new {username = user.UserName}, _mapper.Map<PhotoDTO>(photo));
+                return CreatedAtRoute("GetUser", new { username = user.UserName }, _mapper.Map<PhotoDTO>(photo));
             }
 
             return BadRequest("Problem adding photo");
         }
 
         [HttpPut("set-main-photo/{photoID}")]
-        public async Task<ActionResult> SetMainPhoto(int photoId){
+        public async Task<ActionResult> SetMainPhoto(int photoId)
+        {
             AppUser user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
 
             Photo photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
@@ -116,7 +120,7 @@ namespace API.Controllers
             }
 
             Photo currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
-            
+
             if (currentMain != null)
             {
                 currentMain.IsMain = false;
@@ -133,7 +137,8 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete-photo/{photoID}")]
-        public async Task<ActionResult> DeletePhoto(int photoID){
+        public async Task<ActionResult> DeletePhoto(int photoID)
+        {
 
             AppUser user = await _userRepository.GetUserByUsernameAsync(User.GetUserName());
 
@@ -142,7 +147,8 @@ namespace API.Controllers
             if (photo == null)
             {
                 return NotFound();
-            }else if (photo.IsMain)
+            }
+            else if (photo.IsMain)
             {
                 return BadRequest("You cannot delete your main photo");
             }
