@@ -36,7 +36,7 @@
                     alt="{{message.recipientUsername}}">
                 <strong>{{message.recipientUsername | titlecase}}</strong>
             </div>
-            <div *ngIf="container !== 'Outbox'">
+            <div *ngIf="container!=='Outbox'">
                 <img
                     class="img-circle rounded-circle mr-2"
                     src="{{message.senderPhotoUrl || './assets/user.png'}}" 
@@ -52,7 +52,7 @@
     </table>
 </div>
 
-<div class="d-flex justify-content-center" *ngIf="pagination" && !loading>
+<div class="d-flex justify-content-center" *ngIf="pagination && !loading">
     <pagination 
     [boundaryLinks]="true" 
     [totalItems]="pagination.totalItems"
